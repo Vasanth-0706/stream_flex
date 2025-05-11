@@ -1,0 +1,8 @@
+com\example\vsp_backend\VspBackendApplication.class
+com\example\vsp_backend\SecurityConfig.class
+com\example\vsp_backend\controller\AuthController.class
+com\example\vsp_backend\model\User.class
+com\example\vsp_backend\model\Video.class
+com\example\vsp_backend\repository\VideoRepository.class
+com\example\vsp_backend\controller\VideoController.class
+com\example\vsp_backend\repository\UserRepository.class
