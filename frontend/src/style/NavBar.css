@@ -1,0 +1,90 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;                  /* Changed from 100vw to 100% */
+  min-width: 320px;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32px;
+  height: 64px;
+  background: #fff;
+  border-bottom: 1px solid #f0f0f0;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  z-index: 100;
+  box-sizing: border-box;       /* Add this line */
+  font-family: 'Inter', 'Segoe UI', Arial, Helvetica, sans-serif;
+}
+
+.navbar__logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.navbar__logo img {
+  height: 40px;
+  width: 40px;
+  border-radius: 8px;
+  background: #f5f5f5;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+
+.navbar__brand {
+  font-weight: 700;
+  font-size: 24px;
+  color: #ff1744;
+  letter-spacing: -1px;
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+.navbar__search {
+  flex: 0 1 380px;            /* Prevents overgrowing */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 120px;           /* Optional: prevent too small */
+  max-width: 380px;           /* Optional: prevent too wide */
+}
+
+.navbar__search input {
+  width: 100%;
+  max-width: 100%;
+  padding: 10px 18px;
+  border: 2px solid #e0e0e0;      /* Add this line */
+  border-radius: 24px;
+  background: #f1f3f4;
+  font-size: 16px;
+  transition: box-shadow 0.2s, border-color 0.2s; /* Add border-color transition */
+  box-shadow: 0 1px 2px rgba(60,60,60,0.06);
+  outline: none;
+}
+
+.navbar__search input:focus {
+  background: #000;
+  color: #fff;
+  border: 2px solid #ff1744;      /* Highlight border on focus */
+  box-shadow: 0 2px 8px rgba(255,23,68,0.08);
+}
+
+.navbar__profile {
+  display: flex;
+  align-items: center;
+  margin-left: 24px;
+}
+
+.navbar__profile img {
+  height: 44px;
+  width: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #f1f3f4;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+  transition: border 0.2s;
+}
+
+.navbar__profile img:hover {
+  border: 2px solid #ff1744;
+}

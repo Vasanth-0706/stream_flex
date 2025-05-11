@@ -1,0 +1,23 @@
+.mainarea {
+  position: absolute;
+  top: 64px; /* height of NavBar */
+  left: 220px; /* width of SideNav */
+  right: 0;
+  bottom: 0;
+  min-height: calc(100vh - 64px);
+  min-width: calc(100vw - 220px);
+  background: #f9f9f9;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  z-index: 1;
+  padding: 40px 0 0 0;
+  overflow-y: auto;
+}
+
+.mainarea-content {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 24px 40px 24px;
+}
