@@ -2,6 +2,7 @@ package com.example.vsp_backend.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import java.util.List;
 
 @Document(collection = "users")
 public class User {
@@ -10,6 +11,9 @@ public class User {
     private String username;
     private String email;
     private String password;
+    private List<String> history; // video IDs watched
+    private List<String> likedVideos; // video IDs liked
+    private List<String> subscriptions; // usernames or channel IDs subscribed
 
     // Getters and setters
     public String getId() {
@@ -42,5 +46,29 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public List<String> getHistory() {
+        return history;
+    }
+
+    public void setHistory(List<String> history) {
+        this.history = history;
+    }
+
+    public List<String> getLikedVideos() {
+        return likedVideos;
+    }
+
+    public void setLikedVideos(List<String> likedVideos) {
+        this.likedVideos = likedVideos;
+    }
+
+    public List<String> getSubscriptions() {
+        return subscriptions;
+    }
+
+    public void setSubscriptions(List<String> subscriptions) {
+        this.subscriptions = subscriptions;
     }
 }

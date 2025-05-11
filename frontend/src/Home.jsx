@@ -1,9 +1,14 @@
 import React, { useEffect, useState } from "react";
 import "./style/Home.css";
+import VideoPlayerModal from "./VideoPlayerModal";
 
 function Home() {
   const [videos, setVideos] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [selectedVideo, setSelectedVideo] = useState(null);
+  const [historyCount, setHistoryCount] = useState(0);
+  const [likedCount, setLikedCount] = useState(0);
+  const [subscribedCount, setSubscribedCount] = useState(0);
 
   useEffect(() => {
     const fetchVideos = async () => {
@@ -25,9 +30,60 @@ function Home() {
     fetchVideos();
   }, []);
 
+  useEffect(() => {
+    // Fetch counts from backend
+    const user = JSON.parse(localStorage.getItem("vsp-user"));
+    if (user && user.username) {
+      fetch(
+        `http://localhost:8080/api/user/${encodeURIComponent(
+          user.username
+        )}/counts`
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          setHistoryCount(data.history || 0);
+          setLikedCount(data.liked || 0);
+          setSubscribedCount(data.subscribed || 0);
+        })
+        .catch(() => {
+          setHistoryCount(0);
+          setLikedCount(0);
+          setSubscribedCount(0);
+        });
+    } else {
+      setHistoryCount(0);
+      setLikedCount(0);
+      setSubscribedCount(0);
+    }
+  }, []);
+
+  // Handle video card click
+  const handleVideoClick = (video) => {
+    setSelectedVideo(video);
+    // Optionally increment view count
+    fetch(`http://localhost:8080/api/videos/${video.id}/view`, {
+      method: "POST",
+    });
+  };
+
   return (
     <div className="mainarea">
       <div className="mainarea-content">
+        {/* Add counts summary here */}
+        <div
+          style={{
+            display: "flex",
+            gap: 32,
+            marginBottom: 24,
+            fontSize: 18,
+            fontWeight: 500,
+            color: "#222",
+          }}
+        >
+          <div>History: {historyCount}</div>
+          <div>Liked Videos: {likedCount}</div>
+          <div>Subscriptions: {subscribedCount}</div>
+        </div>
         <h2 style={{ color: "#111" }}>Home</h2>
         {loading ? (
           <div style={{ color: "#888", fontSize: 20, marginTop: 40 }}>
@@ -49,6 +105,7 @@ function Home() {
             {videos.map((video) => (
               <div
                 key={video.id}
+                onClick={() => handleVideoClick(video)}
                 style={{
                   width: 240,
                   background: "#fafafa",
@@ -59,6 +116,7 @@ function Home() {
                   position: "relative",
                   display: "flex",
                   flexDirection: "column",
+                  cursor: "pointer",
                 }}
               >
                 <img
@@ -101,6 +159,12 @@ function Home() {
               </div>
             ))}
           </div>
+        )}
+        {selectedVideo && (
+          <VideoPlayerModal
+            video={selectedVideo}
+            onClose={() => setSelectedVideo(null)}
+          />
         )}
       </div>
     </div>
